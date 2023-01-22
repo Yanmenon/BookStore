@@ -7,10 +7,10 @@ import java.util.List;
 
 public interface OrderService {
     //生成订单以及订单详情的方法
-    public void saveOrderAndOrderItem(Cart cart,Integer userId);
+    public String saveOrderAndOrderItem(Cart cart,Integer userId);
 
     //查看所有订单
-    public void queryOrders();
+    public List<Order> queryOrders();
 
     //发货
     public void sendOrder(Integer orderId);

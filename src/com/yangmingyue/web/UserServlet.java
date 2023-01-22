@@ -1,5 +1,7 @@
 package com.yangmingyue.web;
 
+import com.alibaba.druid.sql.ast.statement.SQLForeignKeyImpl;
+import com.google.gson.Gson;
 import com.yangmingyue.pojo.User;
 import com.yangmingyue.service.UserService;
 import com.yangmingyue.service.impl.UserServiceImpl;
@@ -11,6 +13,9 @@ import javax.servlet.http.*;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 public class UserServlet extends BaseServlet {
     private UserService userService = new UserServiceImpl();
@@ -37,6 +42,21 @@ public class UserServlet extends BaseServlet {
         System.out.println("已经进入到方法内部");
         //2.将页面跳转到首页
         response.sendRedirect(request.getContextPath());
+    }
+    protected void ajaxExistUsername(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        //1.获取请求的参数username
+        String username=request.getParameter("username");
+        //2.调用userService.existUsername();
+        boolean existUsername=userService.isExistUsername(username);
+        //3.把返回的结果封装成为map对象
+        Map<String, Object> resultMap=new HashMap<>();
+        resultMap.put("existUsername",existUsername);
+        //利用gson对象把一个map对象转化为一个json对象
+        Gson gson=new Gson();
+        String s = gson.toJson(resultMap);
+        //把这个json对象返回到客户端
+        response.getWriter().write(s);
+
     }
 
     /**

@@ -9,6 +9,15 @@
 		<script type="text/javascript">
 			// 页面加载完成之后
 			$(function () {
+				$("username").blur(function (){
+					//1.获取用户名,this.value表示获取当前输入对象的值
+					var username=this.value;
+					//2.添加响应的json代码,data表示从servlet返回的数据，function表示对数据的处理
+					$.getJSON("http://localhost:8080/book/userServlet","action=ajaxExistUsername&username="+username,function (data){
+						console.log(data)
+					})
+				})
+
 				// 给注册绑定单击事件
 				$("#sub_btn").click(function () {
 					// 验证用户名：必须由字母，数字下划线组成，并且长度为5到12位

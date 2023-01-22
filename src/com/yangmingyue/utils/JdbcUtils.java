@@ -8,7 +8,9 @@ import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Properties;
-
+/**
+ * 手动封装jdbc,获取数据库连接，释放数据库连接
+ * */
 public class JdbcUtils {
 
     private static DruidDataSource dataSource;

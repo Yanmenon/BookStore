@@ -13,9 +13,13 @@ public class OrderDaoImpl extends BaseDao implements OrderDao {
         return update(sql,order.getOrderId(),order.getCreateTime(),order.getPrice(),order.getStatus(),order.getUserId());
     }
 
+    /**
+     * 查询出order表中所有的order记录
+     * */
     @Override
     public List<Order> queryOrders() {
-        return null;
+        String sql="select order_id as orderId,create_time as createTime,price,status,userId from t_order";
+        return queryForList(Order.class,sql);
     }
 
     @Override
